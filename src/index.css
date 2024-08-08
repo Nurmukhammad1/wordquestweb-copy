@@ -8,8 +8,9 @@
 }
 
 
-body {
+html, body {
   font-family: sans-serif;
+  height: 100%;
 }
 
 .sliderStyleHeader{
@@ -80,6 +81,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #f0efed;
 }
 
 .modal-content {
@@ -115,13 +117,11 @@ body {
   padding-top: 10vh;
   padding-bottom: 10vh;
 }
-
 .login-title{
   font-size: 3.5rem;
   text-align: center;
   margin-bottom: 20px;
 }
-
 .emailInput{
   height: 50px;
   width: 100%;
@@ -133,7 +133,6 @@ body {
   font-weight: 500;
   
 }
-
 .passwordInput{
   height: 50px;
   width: 100%;
@@ -145,7 +144,6 @@ body {
   font-weight: 500;
   
 }
-
 .authorizationButtons{
   display: flex;
   flex-direction: column;
@@ -170,8 +168,12 @@ body {
   &:hover{
     background: black;
   }
-}
+  &:active {
+    background: #1d5c91; /* Цвет кнопки при нажатии */
+    transform: translateY(2px); /* Эффект нажатия */
+  }
 
+}
 .logOut{
   display: inline-block;
   box-sizing: border-box;
@@ -207,10 +209,7 @@ body {
      background: linear-gradient(180deg, rgba(255, 255, 255, 0.25) 0%, rgba(255, 255, 255, 0) 100%), #3f8ed4;
      text-align: center; 
    }
-   
-  
 }
-
 .logOut:focus-visible{
   box-shadow: 0 0 0 3px lightskyblue;
 }
@@ -221,15 +220,57 @@ body {
   transform: scale(.97);
 }
 
-/* font-size: medium;
-  font-family: Open Sans, Arial;
-  font-weight:bolder;
-  padding: 10px 10px;
-  box-shadow: 0 5px 15px 0 rgb(112, 160, 245);
-  transition: 0.5s;
+.Panel-style{
+  border: 2px solid red;
+
+}
+
+.Space-style1{
+  background: red;
+}
+.Space-style2{
+  background: green;
+  
+}
+.Space-style3{
+  
+  background: grey;
+  
+}
+.Space-style4{
+  
+  background: rgb(103, 103, 245);
+  
+}
+
+.passwordInputContainer {
+  display: flex;
+  align-items:last baseline;
+}
+
+.passwordInput {
+  flex: 1; /* Позволяет полю ввода занимать оставшееся пространство */
+  
+}
+
+.showPasswordButton {
+  text-align: center;
+  background: none;
   border: none;
-  border-radius: 10px;
-  color: black;
-  background: #4885f0;
-  touch-action: manipulation;
-  cursor: pointer; */
+  cursor: pointer;
+  padding: 0 10px;
+  font-size: 20px; /* Размер иконки */
+  display: flex;
+  align-items: center; /* Центрирует иконку вертикально */
+  justify-content: center; /* Центрирует иконку горизонтально */
+}
+
+.input-error {
+  border: 1px solid red;
+  background-color: #ffe6e6;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+}

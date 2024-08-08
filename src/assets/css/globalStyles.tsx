@@ -7,6 +7,7 @@ const globaleStyles = {
         marginBottom: "0px",
         boxShadow: "-0 0 5px rgba(0, 0, 0, 0.5)",
         borderRadius: 2,
+       
       },
       layout: {
         backgroundColor: "#e8f6fa",
@@ -16,6 +17,7 @@ const globaleStyles = {
         marginBottom: "0px",
         boxShadow: "-0 0 5px rgba(0, 0, 0, 0.5)",
         borderRadius: 2,
+         
       },
       card: {
         padding: "5px",
@@ -24,11 +26,13 @@ const globaleStyles = {
         marginRight: "5px",
         fontFamily: "Merriweather",
         boxShadow: "-0 0 8px rgba(0, 0, 0, 2)",
+        
       },
       cardTitle: {
         fontSize: "20px",
         fontFamily: "Merriweather",
         fontWeight: "bold",
+        
       },
       header: {
         display: 'flex',

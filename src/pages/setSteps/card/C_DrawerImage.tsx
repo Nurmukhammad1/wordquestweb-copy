@@ -42,6 +42,7 @@ const C_DrawerImage: React.FC<Props> = ({
   return (
     <Drawer
       title="Images"
+      
       placement={_placement}
       width={500}
       onClose={onClose}

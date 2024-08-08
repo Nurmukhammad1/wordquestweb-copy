@@ -84,7 +84,7 @@ const ListInfiniteFormatableSimple: React.FC<Props> = ({
                 key={item.getId()}
                 onClick={() => handleClick(item)}
                 onDoubleClick={() => handleDoubleClick(item)}
-                style={
+                style={ 
                   isLastItem ? { ...itemDefaultStyle, ...listItemStyles, cursor: "default" } 
                   : {...itemDefaultStyle, ...listItemStyles}
                 }

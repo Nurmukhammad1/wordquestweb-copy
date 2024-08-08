@@ -103,10 +103,11 @@ const AddThemeModel: React.FC<AddThemeModelProps> = ({
   return (
     <Modal
       width={"600px"}
-      style={{ top: "50%", transform: "translateY(-50%)" }}
+      style={{ top: "50%", transform: "translateY(-50%)"}}
       open={isModalOpen}
       onOk={handleOk}
       onCancel={handleClose}
+      
     >
       <Input.TextArea
         showCount
@@ -122,8 +123,9 @@ const AddThemeModel: React.FC<AddThemeModelProps> = ({
           size={size}
           placeholder="Type"
           onChange={handleAThemeTypeChange}
-          style={{ width: 200 }}
+          style={{ width: "200px"}}
           options={_options}
+
         />
     </Modal>
   );

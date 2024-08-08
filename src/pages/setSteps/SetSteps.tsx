@@ -1,16 +1,19 @@
 import { Col, Collapse, Layout, Row, Space, Tooltip } from "antd";
 import { useState, useEffect } from "react";
+import axios from "axios";
 import Iterable from "../../types/Iterable";
 import GoalsList from "./goals/GoalsList";
 import CardsList from "./steps/StepsList";
 import { iterableBuilder } from "../../types/IterableClass";
 import CardMarkDownBasic from "./card/CardMarkDownBasic";
+import CardMarkDownLangLearn from "./card/CardMarkDownLangLearn";
+import CardVideoStream from "./card/CardVideoStream";
 import { PlusSquareFilled } from "@ant-design/icons";
 import AddThemeModel from "./goals/AddThemeModel";
-import axios from "axios";
 import Config from "../../Config";
 import { useToken } from "../../hooks/useToken";
-import CardMarkDownLangLearn from "./card/CardMarkDownLangLearn";
+
+
 const { Panel } = Collapse;
 
 export default function SetSteps() {
@@ -35,6 +38,27 @@ export default function SetSteps() {
       headers: {
         Authorization: _token ? `${_token}` : null,
       },
+    }).then(() => {
+      setReloadCards(true);
+    });
+  };
+
+
+  // функция для удаления карточки
+  const onDeleteCard = (cardId: number) => {
+    const url = `${Config.BACK_SERVER_DOMAIN}/api/cards/${cardId}`;
+    axios.delete(url, {
+      headers: {
+        Authorization: _token ? `${_token}` : null,
+      },
+    })
+    .then(response => {
+      console.log('Card deleted successfully:', response.data);
+      setReloadCards(true);
+      setCard(null);
+    })
+    .catch(error => {
+      console.error('There was an error deleting the card!', error);
     });
   };
 
@@ -91,7 +115,7 @@ export default function SetSteps() {
                 <GoalsList
                   onListReloaded={() => setReloadGoals(false)}
                   reloadList={_reloadGoals}
-                  onItemSelected={(item: Iterable| null) => {
+                  onItemSelected={(item: Iterable | null) => {
                     if (!_blockThemeChange) {
                       setTheme(item);
                       setThemeType(item?.getDetails().type);
@@ -130,7 +154,7 @@ export default function SetSteps() {
           </Collapse>
         </Col>
         <Col span={14}>
-          {_card != null && (_themeType ==="" || _themeType ==="Markdown") && (
+          {_card != null && (_themeType === "" || _themeType === "Markdown") && (
             <>
               <CardMarkDownBasic
                 onEditing={() => setBlockThemeChange(true)}
@@ -151,27 +175,48 @@ export default function SetSteps() {
               />
             </>
           )}
-          {_card != null && _themeType === "Learn Language" && (
-
+          {_card != null && (_themeType === "" || _themeType === "VideoStream") && (
             <>
-            <CardMarkDownLangLearn
-              themeId={_theme?.getId()}
-              onEditing={() => setBlockThemeChange(true)}
-              onSaveCard={(item: Iterable) => {
-                onSaveCard(item);
-                setReloadCards(true);
-              }}
-              onCloseCard={() => {
-                setBlockThemeChange(false);
-                setCard(null);
-              }}
-              card={_card}
-              outerStyle={{
-                marginLeft: "15px",
-                height: 400,
-                width: 580,
-              }}
-            />
+              <CardVideoStream
+                onEditing={() => setBlockThemeChange(true)}
+                onSaveCard={(item: Iterable) => {
+                  onSaveCard(item);
+                  setReloadCards(true);
+                }}
+                onCloseCard={() => {
+                  setBlockThemeChange(false);
+                  setCard(null);
+                }}
+                onDeleteCard={() => onDeleteCard(_card.getId())} // добавили метод onDeleteCard
+                card={_card}
+                outerStyle={{
+                  marginLeft: "15px",
+                  height: 400,
+                  width: 580,
+                }}
+              />
+            </>
+          )}
+          {_card != null && _themeType === "Learn Language" && (
+            <>
+              <CardMarkDownLangLearn
+                themeId={_theme?.getId()}
+                onEditing={() => setBlockThemeChange(true)}
+                onSaveCard={(item: Iterable) => {
+                  onSaveCard(item);
+                  setReloadCards(true);
+                }}
+                onCloseCard={() => {
+                  setBlockThemeChange(false);
+                  setCard(null);
+                }}
+                card={_card}
+                outerStyle={{
+                  marginLeft: "15px",
+                  height: 400,
+                  width: 580,
+                }}
+              />
             </>
           )}
         </Col>
